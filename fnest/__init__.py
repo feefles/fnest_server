@@ -1,5 +1,5 @@
 from flask import Flask, url_for
-import os
+import os, ctypes
 
 fnest = Flask(__name__)
 
@@ -11,6 +11,8 @@ fnest.jinja_env.globals['static'] = (
 
 fnest.config['current_temp'] = 66
 fnest.config['set_temp'] = 70
+
+fnest.config['mmap_lib'] = ctypes.cdll.LoadLibrary('./mmap.so')
 
 from fnest import views
 from fnest import api

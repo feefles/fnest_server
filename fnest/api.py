@@ -3,11 +3,13 @@ from fnest import fnest
 import time
 import serial
 
+
 @fnest.route('/setTemp', methods=['GET'])
 def set():
     temp = request.args["temp"]
     print temp
     fnest.config['set_temp'] = temp
+    fnest.config['mmap_lib'].change_cur_temp(t)
     return jsonify(temp=temp)
 
 
