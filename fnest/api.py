@@ -6,7 +6,7 @@ import serial
 
 @fnest.route('/setTemp', methods=['GET'])
 def set():
-    temp = request.args["temp"]
+    temp = request.args["setpoint"]
     print temp
     fnest.config['set_temp'] = temp
     fnest.config['mmap_lib'].change_cur_temp(t)
@@ -15,7 +15,10 @@ def set():
 
 @fnest.route('/getTemp', methods=['GET'])
 def get():
-    return jsonify(cur_temp = fnest.config['current_temp'], set_temp = fnest.config['set_temp'])
+    fnest.config['current_temp'] = fnest.config['mmap_lib'].get_cur_temp();
+    return jsonify(
+        cur_temp = fnest.config['current_temp'], 
+        set_temp = fnest.config['set_temp'])
 
 @fnest.route('/poll', methods=['GET'])
 def poll():
