@@ -10,7 +10,8 @@ def set():
     print temp
     fnest.config['set_temp'] = temp
     fnest.config['mmap_lib'].change_cur_temp(t)
-    return jsonify(temp=temp)
+    cur_temp = mmap.config['mmap_lib'].get_cur_temp(t)
+    return jsonify(set_temp=temp, cur_temp = cur_temp)
 
 
 @fnest.route('/getTemp', methods=['GET'])
