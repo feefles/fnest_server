@@ -28,6 +28,5 @@ void change_set_temp(int temp) {
 
 int get_cur_temp() {
     setupFile();
-    close(mmap_fileno);
     return p_mmapData->cur_temp;
 }
